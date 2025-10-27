@@ -1,3 +1,7 @@
+-- Set leader key to spacebar (MUST be before any keymaps)
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 -- Background directory configuration
 local bg_dir = vim.fn.expand('~/.config/nvim/backgrounds')
 
@@ -165,6 +169,11 @@ vim.keymap.set('n', '<leader>bb', switch_buffer, { desc = 'Switch buffer' })
 vim.keymap.set('n', '<Tab>', next_buffer, { desc = 'Next buffer' })
 vim.keymap.set('n', '<S-Tab>', prev_buffer, { desc = 'Previous buffer' })
 
+-- Split keybindings
+vim.keymap.set('n', '<leader>bv', ':vsplit<CR>', { desc = 'Split buffer right' })
+vim.keymap.set('n', '<leader>bh', ':split<CR>', { desc = 'Split buffer below' })
+vim.keymap.set('n', '<leader>bx', ':close<CR>', { desc = 'Close split' })
+
 -- Basic keybindings
 vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Save file' })
 vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = 'Quit' })
@@ -191,7 +200,6 @@ vim.api.nvim_set_hl(0, "SpecialKey", { bg = "none" })
 vim.api.nvim_set_hl(0, "VertSplit", { bg = "none" })
 vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
 
-print("Background & Buffer config loaded!")
-print("Background: :BgSelect, :BgRemove, :BgDir")
-print("Buffers: :BufNew, :BufClose, :BufList, :BufSwitch")
-print("Keys: <Space>bn (new), <Space>bc (close), <Tab> (next), <S-Tab> (prev)")
+print("✓ Background & Buffer config loaded!")
+print("Commands: :BgSelect | :BgRemove | :BufNew | :BufList")
+print("Keybinds: <Space>bn=new | <Space>bv=vsplit | Tab=next | <Space>bc=close")
