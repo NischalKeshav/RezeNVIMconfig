@@ -5,52 +5,7 @@ vim.g.maplocalleader = ' '
 -- Background directory configuration
 local bg_dir = vim.fn.expand('~/.config/nvim/backgrounds')
 
--- Create directory if it doesn't exist
-vim.fn.mkdir(bg_dir, 'p')
-
--- Function to change background in Kitty
-local function change_bg_kitty(image_path)
-  if vim.fn.executable('kitty') == 0 then
-    print("Kitty terminal not found")
-    return
-  end
-  local cmd = string.format(
-    "kitty @ set-background-image --configured '%s'",
-    image_path
-  )
-  vim.fn.system(cmd)
-  print("Background changed to: " .. vim.fn.fnamemodify(image_path, ':t'))
-end
-
--- Function to list and select background images
-local function select_background()
-  local images = vim.fn.glob(bg_dir .. '/*.{jpg,jpeg,png,gif}', false, true)
-  if #images == 0 then
-    print("No images found in " .. bg_dir)
-    print("Add images to: " .. bg_dir)
-    return
-  end
-  print("Select background:")
-  for i, img in ipairs(images) do
-    print(i .. ". " .. vim.fn.fnamemodify(img, ':t'))
-  end
-  local choice = vim.fn.input("Enter number: ")
-  local idx = tonumber(choice)
-  if idx and idx > 0 and idx <= #images then
-    change_bg_kitty(images[idx])
-  else
-    print("Invalid selection")
-  end
-end
-
--- Function to remove background
-local function remove_background()
-  if vim.fn.executable('kitty') == 1 then
-    vim.fn.system("kitty @ set-background-image --configured none")
-    print("Background removed")
-  end
-end
-
+vim.wo.number = true
 -- ============================================
 -- BUFFER MANAGEMENT FUNCTIONS
 -- ============================================
@@ -137,12 +92,6 @@ end
 -- ============================================
 
 -- Background commands
-vim.api.nvim_create_user_command('BgSelect', select_background, {})
-vim.api.nvim_create_user_command('BgRemove', remove_background, {})
-vim.api.nvim_create_user_command('BgDir', function()
-  print("Background directory: " .. bg_dir)
-  vim.cmd('!ls -lh ' .. bg_dir)
-end, {})
 
 -- Buffer commands
 vim.api.nvim_create_user_command('BufNew', new_buffer, {})
@@ -154,12 +103,6 @@ vim.api.nvim_create_user_command('BufSwitch', switch_buffer, {})
 -- KEYBINDINGS
 -- ============================================
 
--- Background keybindings
-vim.keymap.set('n', '<leader>bs', select_background, { desc = 'Select background' })
-vim.keymap.set('n', '<leader>br', remove_background, { desc = 'Remove background' })
-vim.keymap.set('n', '<leader>bd', function()
-  vim.cmd('!open ' .. bg_dir)
-end, { desc = 'Open background directory' })
 
 -- Buffer keybindings
 vim.keymap.set('n', '<leader>bn', new_buffer, { desc = 'New buffer' })
@@ -200,6 +143,33 @@ vim.api.nvim_set_hl(0, "SpecialKey", { bg = "none" })
 vim.api.nvim_set_hl(0, "VertSplit", { bg = "none" })
 vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
 
+
+--added features
+--
+-- vim-plug setup
+local Plug = vim.fn['plug#']
+
+vim.call('plug#begin', '~/.config/nvim/plugged')
+
+-- Add your plugins here
+Plug 'nvim-lua/plenary.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'folke/tokyonight.nvim'
+
+
+
+vim.keymap.set('n', '<leader><leader>', ':Telescope find_files <CR>', {desc= 'Find files via telescope'})
+
+
+
+-- Add more plugins as needed
+
+vim.call('plug#end')
+vim.wo.relativenumber = true
+
 print("✓ Background & Buffer config loaded!")
-print("Commands: :BgSelect | :BgRemove | :BufNew | :BufList")
 print("Keybinds: <Space>bn=new | <Space>bv=vsplit | Tab=next | <Space>bc=close")
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
