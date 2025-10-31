@@ -89,6 +89,6 @@ vim.cmd('filetype plugin indent on')
 
 -- Keymaps
 vim.keymap.set('n', '<leader><leader>', ':Telescope find_files<CR>', {desc = 'Find files via telescope'})
-
 print("✓ Background & Buffer config loaded!")
 print("Keybinds: <Space>bn=new | <Space>bv=vsplit | Tab=next | <Space>bc=close")
+
