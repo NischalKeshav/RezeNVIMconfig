@@ -1,6 +1,6 @@
 -- init.lua with lazy.nvim package manager
-
 -- Bootstrap lazy.nvim
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -21,14 +21,15 @@ vim.g.maplocalleader = " "
 -- Plugin specifications
 require("lazy").setup({
   -- Dependencies
+  { import = "plugins" },
   'nvim-lua/plenary.nvim',
   
   -- LSP
-  'neovim/nvim-lspconfig',
-  
+   -- LSP
+
   -- Completion
-  'hrsh7th/nvim-cmp',
-  
+  -- Completion
+
   -- Telescope
   {
     'nvim-telescope/telescope.nvim',
@@ -89,6 +90,16 @@ vim.cmd('filetype plugin indent on')
 
 -- Keymaps
 vim.keymap.set('n', '<leader><leader>', ':Telescope find_files<CR>', {desc = 'Find files via telescope'})
+vim.keymap.set('n', '<leader>pv',vim.cmd.Ex, {desc= 'Switch to file searcer'})
+
+
+
 print("✓ Background & Buffer config loaded!")
 print("Keybinds: <Space>bn=new | <Space>bv=vsplit | Tab=next | <Space>bc=close")
+vim.opt.swapfile = true
+vim.opt.directory = vim.fn.stdpath("data") .. "/swap//"
+vim.opt.updatecount = 100
+
+vim.opt.swapfile = true;
+
 
