@@ -93,13 +93,10 @@ vim.keymap.set('n', '<leader><leader>', ':Telescope find_files<CR>', {desc = 'Fi
 vim.keymap.set('n', '<leader>pv',vim.cmd.Ex, {desc= 'Switch to file searcer'})
 
 
-
-print("✓ Background & Buffer config loaded!")
-print("Keybinds: <Space>bn=new | <Space>bv=vsplit | Tab=next | <Space>bc=close")
+vim.opt.signcolumn = "yes"
 vim.opt.swapfile = true
 vim.opt.directory = vim.fn.stdpath("data") .. "/swap//"
 vim.opt.updatecount = 100
 
 vim.opt.swapfile = true;
-
 
