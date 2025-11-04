@@ -1,7 +1,11 @@
 return {
   'neovim/nvim-lspconfig',
+  dependencies = {
+    'saghen/blink.cmp',
+  },
   config = function()
-    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    -- Use blink.cmp capabilities instead of cmp_nvim_lsp
+    local capabilities = require('blink.cmp').get_lsp_capabilities()
     
     -- Lua LSP
     vim.lsp.config('lua_ls', {
