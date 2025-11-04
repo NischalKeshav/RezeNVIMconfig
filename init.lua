@@ -25,8 +25,6 @@ require("lazy").setup({
   'nvim-lua/plenary.nvim',
   
 
-  -- Completion
-  -- Completion
 
   -- Telescope
   {
@@ -69,7 +67,19 @@ require("lazy").setup({
       end
       
       configs.setup({
-        ensure_installed = "all",
+        ensure_installed = {
+        "lua",
+        "vim",
+        "vimdoc",
+        "python",
+        "javascript",
+        "typescript",
+        "html",
+        "css",
+        "json",
+        "markdown",
+        "bash"
+	},
         highlight = {
           enable = true,
         },
