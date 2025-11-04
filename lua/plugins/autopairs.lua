@@ -1,20 +1,29 @@
-return{
+return {
   'windwp/nvim-autopairs',
   event = "InsertEnter",
-  dependencies = { 'saghen/blink.cmp' },
   config = function()
     local autopairs = require('nvim-autopairs')
-    autopairs.setup({})
+    autopairs.setup({
+      check_ts = true,
+      ts_config = {
+        lua = {'string'},
+        javascript = {'template_string'},
+      },
+      fast_wrap = {
+        map = '<M-e>',
+        chars = { '{', '[', '(', '"', "'" },
+        pattern = [=[[%'%"%>%]%)%}%,]]=],
+        end_key = '$',
+        keys = 'qwertyuiopzxcvbnmasdfghjkl',
+        check_comma = true,
+        highlight = 'Search',
+        highlight_grey='Comment'
+      },
+    })
     
-    -- blink.cmp integration
-    local blink_ok, blink = pcall(require, 'blink.cmp')
-    if blink_ok then
-      blink.on_confirm_done = function()
-        local autopairs_ok, cmp_autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
-        if autopairs_ok then
-          cmp_autopairs.on_confirm_done()
-        end
-      end
-    end
+    -- Integration with nvim-cmp
+    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+    local cmp = require('cmp')
+    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
   end,
 }

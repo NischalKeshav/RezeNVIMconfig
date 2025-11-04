@@ -1,5 +1,6 @@
 -- init.lua with lazy.nvim package manager
 -- Bootstrap lazy.nvim
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -96,8 +97,9 @@ vim.cmd('syntax on')
 vim.cmd('filetype plugin indent on')
 
 -- Keymaps
-vim.keymap.set('n', '<leader><leader>', ':Telescope find_files<CR>', {desc  = 'Find files via telescope'})
+vim.keymap.set('n', '<leader><leader>', ':Telescope find_files<CR>', {desc = 'Find files via telescope'})
 vim.keymap.set('n', '<leader>pv',vim.cmd.Ex, {desc= 'Switch to file searcer'})
+
 
 vim.opt.signcolumn = "yes"
 vim.opt.swapfile = true
