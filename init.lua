@@ -98,13 +98,11 @@ vim.cmd('filetype plugin indent on')
 
 -- Keymaps
 vim.keymap.set('n', '<leader><leader>', ':Telescope find_files<CR>', {desc = 'Find files via telescope'})
-vim.keymap.set('n', '<leader>pv',vim.cmd.Ex, {desc= 'Switch to file searcer'})
-
-
+vim.keymap.set('n', '<leader>pv',':Oil<CR>', {desc= 'Switch to file searcer'})
+vim.keymap.set('n', '<leader>t',':!', {desc='open the terminal area'})
 vim.opt.signcolumn = "yes"
 vim.opt.swapfile = true
 vim.opt.directory = vim.fn.stdpath("data") .. "/swap//"
 vim.opt.updatecount = 100
 
 vim.opt.swapfile = true;
-
