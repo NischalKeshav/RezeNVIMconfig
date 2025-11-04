@@ -24,8 +24,6 @@ require("lazy").setup({
   { import = "plugins" },
   'nvim-lua/plenary.nvim',
   
-  -- LSP
-   -- LSP
 
   -- Completion
   -- Completion
