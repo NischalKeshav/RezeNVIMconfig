@@ -93,18 +93,29 @@ require("lazy").setup({
 
 -- Options
 vim.wo.relativenumber = true
+vim.wo.number = true
 vim.cmd('syntax on')
 vim.cmd('filetype plugin indent on')
 
 -- Keymaps
 vim.keymap.set('n', '<leader><leader>', ':Telescope find_files<CR>', {desc = 'Find files via telescope'})
 vim.keymap.set('n', '<leader>pv',vim.cmd.Ex, {desc= 'Switch to file searcer'})
+vim.keymap.set('n', '<leader>pv',':Oil<CR>', {desc= 'Switch to file searcer'})
+vim.keymap.set('n', '<leader>t',':!', {desc='open the terminal area'})
+vim.keymap.set('n', '<leader>cp',':Oil<CR>', {desc= 'Switch to file searcer'})
+
+vim.keymap.set('n', '<leader>g',':!git add .<CR> git commit -m "t commit -m "', {desc= 'Switch to file searcer'})
+vim.keymap.set('n', '<leader>gpm',':!git push origin main<CR>', {desc= 'Switch to file searcer'})
+vim.keymap.set('n', '<leader>gp',':!git push origint commit -m " n', {desc= 'Switch to file searcer'})
+
+
+
 
 
 vim.opt.signcolumn = "yes"
 vim.opt.swapfile = true
 vim.opt.directory = vim.fn.stdpath("data") .. "/swap//"
 vim.opt.updatecount = 100
-
 vim.opt.swapfile = true;
 
+vim.lsp.enable('svelte')

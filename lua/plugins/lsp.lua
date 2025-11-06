@@ -22,13 +22,12 @@ return {
       },
     })
     
-    -- JavaScript/TypeScript LSP
     vim.lsp.config('ts_ls', {
       capabilities = capabilities,
       cmd = { 'typescript-language-server', '--stdio' },
       root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
     })
-    
+   vim.lsp.enable('svelte') 
     -- Python LSP
     vim.lsp.config('pyright', {
       capabilities = capabilities,
