@@ -78,7 +78,8 @@ require("lazy").setup({
         "css",
         "json",
         "markdown",
-        "bash"
+        "bash",
+	"zig",				
 	},
         highlight = {
           enable = true,
@@ -109,7 +110,11 @@ vim.keymap.set('n', '<leader>gpm',':!git push origin main<CR>', {desc= 'Switch t
 vim.keymap.set('n', '<leader>gp',':!git push origint commit -m " n', {desc= 'Switch to file searcer'})
 
 
-
+--temps
+vim.keymap.set('n', '<leader>rc',':!clang++ main.cpp<CR> ./a.out<CR> ', {desc= 'temp to run c++ code'})
+vim.api.nvim_create_user_command('Zig', function()
+  vim.cmd('!zig run %')
+end, {})
 
 
 vim.opt.signcolumn = "yes"
@@ -118,4 +123,3 @@ vim.opt.directory = vim.fn.stdpath("data") .. "/swap//"
 vim.opt.updatecount = 100
 vim.opt.swapfile = true;
 
-vim.lsp.enable('svelte')
