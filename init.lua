@@ -29,7 +29,8 @@ require("lazy").setup({
   -- Telescope
   {
     'nvim-telescope/telescope.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' }
+    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-lua/popup.nvim', 'nvim-telescope/telescope-media-files.nvim' }
+
   },
   
   -- Theme
@@ -79,7 +80,9 @@ require("lazy").setup({
         "json",
         "markdown",
         "bash",
-	"zig",				
+	"zig",
+	"svelte",
+	"cpp",
 	},
         highlight = {
           enable = true,
@@ -97,6 +100,7 @@ vim.wo.relativenumber = true
 vim.wo.number = true
 vim.cmd('syntax on')
 vim.cmd('filetype plugin indent on')
+require('telescope').load_extension('media_files')
 
 -- Keymaps
 vim.keymap.set('n', '<leader><leader>', ':Telescope find_files<CR>', {desc = 'Find files via telescope'})
@@ -108,7 +112,7 @@ vim.keymap.set('n', '<leader>cp',':Oil<CR>', {desc= 'Switch to file searcer'})
 vim.keymap.set('n', '<leader>g',':!git add .<CR> git commit -m "t commit -m "', {desc= 'Switch to file searcer'})
 vim.keymap.set('n', '<leader>gpm',':!git push origin main<CR>', {desc= 'Switch to file searcer'})
 vim.keymap.set('n', '<leader>gp',':!git push origint commit -m " n', {desc= 'Switch to file searcer'})
-
+vim.keymap.set('n', 'mg', vim.diagnostic.open_float)
 
 --temps
 vim.keymap.set('n', '<leader>rc',':!clang++ main.cpp<CR> ./a.out<CR> ', {desc= 'temp to run c++ code'})
@@ -121,5 +125,26 @@ vim.opt.signcolumn = "yes"
 vim.opt.swapfile = true
 vim.opt.directory = vim.fn.stdpath("data") .. "/swap//"
 vim.opt.updatecount = 100
-vim.opt.swapfile = true;
+vim.opt.swapfile = false;
+vim.opt.wrap = false
 
+
+
+
+
+
+
+
+
+
+
+vim.keymap.set('n', '<Up>', '<Nop>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Down>', '<Nop>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Left>', '<Nop>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Right>', '<Nop>', { noremap = true, silent = true })
+
+-- Disable arrow keys in Insert mode
+vim.keymap.set('i', '<Up>', '<Nop>', { noremap = true, silent = true })
+vim.keymap.set('i', '<Down>', '<Nop>', { noremap = true, silent = true })
+vim.keymap.set('i', '<Left>', '<Nop>', { noremap = true, silent = true })
+vim.keymap.set('i', '<Right>', '<Nop>', { noremap = true, silent = true })

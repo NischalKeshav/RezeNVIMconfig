@@ -1,7 +1,7 @@
 return {
   'neovim/nvim-lspconfig',
   config = function()
-    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    local capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
 
     -- Lua LSP
     vim.lsp.config('lua_ls', {
@@ -21,7 +21,6 @@ return {
         },
       },
     })
-
     -- TypeScript / JavaScript LSP
     vim.lsp.config('ts_ls', {
       capabilities = capabilities,
