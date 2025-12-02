@@ -5,8 +5,7 @@ local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
-    "clone",
-    "--filter=blob:none",
+    "clone", "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
     "--branch=stable",
     lazypath,
@@ -22,9 +21,8 @@ vim.g.maplocalleader = " "
 require("lazy").setup({
   -- Dependencies
   { import = "plugins" },
-  'nvim-lua/plenary.nvim',
+  'nvim-lua/plenary.nvim', 
   
-
 
   -- Telescope
   {
@@ -54,43 +52,6 @@ require("lazy").setup({
       })
       
       vim.cmd([[colorscheme rose-pine]])
-    end,
-  },
-  -- Treesitter
-  {
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
-    event = { "BufReadPost", "BufNewFile" },
-    config = function()
-      local status_ok, configs = pcall(require, 'nvim-treesitter.configs')
-      if not status_ok then
-        return
-      end
-      
-      configs.setup({
-        ensure_installed = {
-        "lua",
-        "vim",
-        "vimdoc",
-        "python",
-        "javascript",
-        "typescript",
-        "html",
-        "css",
-        "json",
-        "markdown",
-        "bash",
-	"zig",
-	"svelte",
-	"cpp",
-	},
-        highlight = {
-          enable = true,
-        },
-        indent = {
-          enable = true,
-        },
-      })
     end,
   },
 })
@@ -131,11 +92,33 @@ vim.opt.wrap = false
 
 
 
+local function map_all_modes(lhs, rhs, opts)
+  -- The modes list: Normal, Insert, Visual, Command, and Terminal
+  vim.keymap.set({'n', 'i', 'v', 'c', 't'}, lhs, rhs, opts)
+end
 
+-- Map Ctrl+Q to the built-in Neovim window switch command
+map_all_modes('<C-q>', '<C-w>w', {
+    silent = true,
+    desc = "Switch to next window in all modes"
+})
 
+local ls = require("luasnip")
+local luasnip_expand = function()
+  if ls.expand_or_jumpable() then
+    ls.expand_or_jump()
+  end
+end
 
+-- Keymaps
+vim.api.nvim_set_keymap("i", "<C-k>", "<cmd>lua require('luasnip').expand_or_jump()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("s", "<C-k>", "<cmd>lua require('luasnip').expand_or_jump()<CR>", { noremap = true, silent = true })
 
+vim.api.nvim_set_keymap("i", "<C-j>", "<cmd>lua require('luasnip').jump(-1)<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("s", "<C-j>", "<cmd>lua require('luasnip').jump(-1)<CR>", { noremap = true, silent = true })
 
+vim.keymap.set('t', '<C-a>', '<C-\\><C-n>')
+vim.keymap.set('t', '<C-q>','<C-a><C-q>')
 
 
 vim.keymap.set('n', '<Up>', '<Nop>', { noremap = true, silent = true })

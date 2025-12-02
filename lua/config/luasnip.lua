@@ -129,12 +129,17 @@ ls.add_snippets("python", {
 })
 
 -- C/C++ snippets
+local s = ls.snippet
+local t = ls.text_node
+local i = ls.insert_node
+
 ls.add_snippets("c", {
   s("main", {
     t({"int main() {", "    "}),
     i(1),
     t({"", "    return 0;", "}"}),
   }),
+
   s("for", {
     t("for (int "),
     i(1, "i"),
@@ -152,4 +157,30 @@ ls.add_snippets("c", {
   }),
 })
 
+-- make cpp inherit C snippets
 ls.add_snippets("cpp", ls.get_snippets("c"))
+
+-- add your std.h header snippet
+ls.add_snippets("cpp", {
+  s("stdh", {
+    t({
+      "#include <iostream>",
+      "#include <vector>",
+      "#include <string>",
+      "#include <algorithm>",
+      "#include <cmath>",
+      "#include <iomanip>",
+      "#include <map>",
+      "#include <set>",
+      "#include <queue>",
+      "#include <stack>",
+      "#include <unordered_map>",
+      "#include <unordered_set>",
+      "#include <numeric>",
+      "#include <climits>",
+      "#include <cstring>",
+      "",
+      "using namespace std;",
+    }),
+  }),
+})

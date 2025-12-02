@@ -1,0 +1,9 @@
+{
+	"stdh":{
+		"prefix" :"stdh",
+		"body":[
+			"#include <iostream>",
+			"using namespace std;"
+		]
+	}
+}
